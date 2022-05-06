@@ -84,7 +84,18 @@ def show_pokemon(request, pokemon_id):
                 .image
                 .url
             )
-        }                
+        }
+    if pokemon.next_evolution.all():
+        next_evolution = pokemon.next_evolution.all()[0]
+        old_style_pokemon['next_evolution'] = {
+            'title':next_evolution.title,
+            'pokemon_id':next_evolution.id,
+            'img_url':request.build_absolute_uri(
+                next_evolution
+                .image
+                .url
+            )
+        }
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon':old_style_pokemon
         }
