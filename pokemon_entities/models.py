@@ -17,13 +17,13 @@ class PokemonEntity(models.Model):
     lattitude = models.FloatField('Lat.')
     longitude = models.FloatField('Lon.')
     appeared_at = models.DateTimeField(default=timezone.now())
-    disappeared_at = models.DateTimeField(default=None, blank=True)
-    level = models.IntegerField('Level')
-    health = models.IntegerField('Health')
-    strength = models.IntegerField('Strength')
-    defence = models.IntegerField('Defence')
-    stamina = models.IntegerField('Stamina')
+    disappeared_at = models.DateTimeField(default=None, blank=True, null=True)
+    level = models.IntegerField('Level', null=True, blank=True)
+    health = models.IntegerField('Health', null=True, blank=True)
+    strength = models.IntegerField('Strength', null=True, blank=True)
+    defence = models.IntegerField('Defence', null=True, blank=True)
+    stamina = models.IntegerField('Stamina', null=True, blank=True)
     
     
     def __str__(self):
-        return '{}, {}'.format(self.lattitude, self.longitude)
+        return '{}  {}'.format(self.id, self.pokemon.title)
