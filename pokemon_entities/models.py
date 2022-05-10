@@ -18,7 +18,8 @@ class Pokemon(models.Model):
         'Pokemon',
         related_name='next_evolutions',
         on_delete=models.SET_NULL,
-        null=True
+        null=True,
+        blank=True
     )
     
     def __str__(self):
