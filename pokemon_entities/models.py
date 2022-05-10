@@ -4,7 +4,6 @@ from django.utils import timezone
 
 
 class Pokemon(models.Model):
-    id = models.AutoField(primary_key=True, unique=True)
     title = models.CharField('Имя покемона', max_length=200)
     title_en = models.CharField('Имя англ.', max_length=200, blank=True)
     title_jap = models.CharField('Имя яп.', max_length=200, blank=True)
@@ -27,7 +26,6 @@ class Pokemon(models.Model):
 
 
 class PokemonEntity(models.Model):
-    id = models.AutoField(primary_key=True, unique=True)
     pokemon = models.ForeignKey(Pokemon, on_delete=models.CASCADE)
     lattitude = models.FloatField('Широта')
     longitude = models.FloatField('Долгота')
