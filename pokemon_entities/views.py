@@ -1,6 +1,5 @@
 import folium
 
-from django.http import HttpResponseNotFound
 from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.utils import timezone
 
@@ -68,35 +67,35 @@ def show_pokemon(request, pokemon_id):
             request.build_absolute_uri(pokemon_to_show.image.url)
         )
     old_style_pokemon = {
-            'title_ru':pokemon_to_show.title,
-            'description':pokemon_to_show.description,
-            'img_url':request.build_absolute_uri(pokemon_to_show.image.url),
-            'title_en':pokemon_to_show.title_en,
-            'title_jp':pokemon_to_show.title_jap
+            'title_ru': pokemon_to_show.title,
+            'description': pokemon_to_show.description,
+            'img_url': request.build_absolute_uri(pokemon_to_show.image.url),
+            'title_en': pokemon_to_show.title_en,
+            'title_jp': pokemon_to_show.title_jap
     }
     if pokemon_to_show.previous_evolution:
         old_style_pokemon['previous_evolution'] = {
-            'title':pokemon_to_show.previous_evolution.title,
-            'pokemon_id':pokemon_to_show.previous_evolution.id,
-            'img_url':request.build_absolute_uri(
+            'title': pokemon_to_show.previous_evolution.title,
+            'pokemon_id': pokemon_to_show.previous_evolution.id,
+            'img_url': request.build_absolute_uri(
                 pokemon_to_show
                 .previous_evolution
                 .image
                 .url
             )
         }
-    next_evolution = pokemon_to_show.next_evolutions.all().first()
+    next_evolution = pokemon_to_show.next_evolutions.first()
     if next_evolution:
         old_style_pokemon['next_evolution'] = {
-            'title':next_evolution.title,
-            'pokemon_id':next_evolution.id,
-            'img_url':request.build_absolute_uri(
+            'title': next_evolution.title,
+            'pokemon_id': next_evolution.id,
+            'img_url': request.build_absolute_uri(
                 next_evolution
                 .image
                 .url
             )
         }
     return render(request, 'pokemon.html', context={
-        'map': folium_map._repr_html_(), 'pokemon':old_style_pokemon
+        'map': folium_map._repr_html_(), 'pokemon': old_style_pokemon
         }
     )
